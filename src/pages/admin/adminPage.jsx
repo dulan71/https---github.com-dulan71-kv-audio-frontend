@@ -3,13 +3,16 @@ import { FaRegBookmark } from "react-icons/fa";
 import { FaRegUser } from "react-icons/fa6";
 import { MdSpeaker } from "react-icons/md";
 import { Link, Route, Routes } from "react-router-dom";
+import AdminItemPage from "./adminItemPage";
+import AddItems from "./addItemPage";
+
 
 export default function AdminPage(){
     return(
 
         
             <div className='w-full h-screen flex'>
-              <div className='w-[400px] h-full bg-green-200'>
+              <div className='w-[200px] h-full bg-green-200'>
                 <button className='w-full h-[40px] text[25px] font-bold flex justify-center items-center'>
                   <BsGraphDown/>
                   Dashboard
@@ -29,11 +32,11 @@ export default function AdminPage(){
                 </Link>
                </div>
               
-              <div className='w-[calc(100vw-400px)] bg-red-400'>
+              <div className='w-[calc(100vw-200px)] bg-white'>
                 <Routes path="/*">
                 <Route path="/bookings" element={<h1>Booking</h1>}/>
-                <Route path="/items" element={<h1>Items</h1>}/>
-
+                <Route path="/items" element={<AdminItemPage/>}/>
+                <Route path="/items/add" element={<AddItems/>}/>
                 </Routes>
                 
               </div>
