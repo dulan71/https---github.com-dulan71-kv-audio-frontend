@@ -1,17 +1,23 @@
 import axios from "axios";
 import { useState } from "react";
 import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
-export default function AddItemPage() {
-  const [productKey, setProductKey] = useState("");
-  const [productName, setProductName] = useState("");
-  const [productPrice, setProductPrice] = useState("0");
-  const [productCategory, setProductCategory] = useState("");
-  const [productDimensions, setProductDimensions] = useState("");
-  const [productDescription, setProductDescription] = useState("");
+export default function UpdateItemPage() {
+
+    const location = useLocation() //set items in to update text
+
+    console.log(location)
+
+  const [productKey, setProductKey] = useState(location.state.key);
+  const [productName, setProductName] = useState(location.state.name);
+  const [productPrice, setProductPrice] = useState(location.state.price);
+  const [productCategory, setProductCategory] = useState(location.state.category);
+  const [productDimensions, setProductDimensions] = useState(location.state.dimensions);
+  const [productDescription, setProductDescription] = useState(location.state.description);
   const navigate = useNavigate()
-
+ 
+ 
   async function handleAddItem(){
     console.log(productKey,productName,productPrice,productCategory, productDescription, productDimensions)
     
@@ -21,7 +27,7 @@ export default function AddItemPage() {
 
         try{
 
-       const result =  axios.post("http://localhost:3000/api/products",{
+       const result = await axios.put("http://localhost:3000/api/products/"+productKey,{
 
             key : productKey,
             name : productName,
@@ -54,9 +60,11 @@ console.log(result);
 
   return (
     <div className="w-full h-full flex flex-col items-center p-4">
-      <h1 className="text-xl font-bold mb-4">Add Items</h1>
+      <h1 className="text-xl font-bold mb-4">Update Item</h1>
       <div className="w-[400px] border p-4 flex flex-col items-center gap-2">
+       
         <input
+          disabled   // no change primary key
           type="text"
           placeholder="Product Key"
           value={productKey}
@@ -107,7 +115,7 @@ console.log(result);
         />
 
         <button onClick={handleAddItem} className="rounded-lg bg-blue-500 text-white p-2 w-full hover:bg-blue-600">
-          Add
+          Update Item
         </button>
         <button onClick={()=>{navigate("/admin/items/")}} className="rounded-lg bg-red-500 text-white p-2 w-full hover:bg-red-600">
             Cancel
