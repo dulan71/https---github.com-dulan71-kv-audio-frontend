@@ -8,6 +8,8 @@ import AddItemPage from "./addItemPage";
 import UpdateItemPage from "./updateItem";
 
 
+
+
 export default function AdminPage(){
     return(
 
@@ -39,6 +41,7 @@ export default function AdminPage(){
                 <Route path="/items" element={<AdminItemPage/>}/>
                 <Route path="/items/add" element={<AddItemPage/>}/>
                 <Route path="/items/edit" element={<UpdateItemPage/>}/>
+                
                 </Routes>
                 
               </div>

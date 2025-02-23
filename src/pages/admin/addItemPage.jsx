@@ -10,6 +10,7 @@ export default function AddItemPage() {
   const [productCategory, setProductCategory] = useState("");
   const [productDimensions, setProductDimensions] = useState("");
   const [productDescription, setProductDescription] = useState("");
+  
   const navigate = useNavigate()
 
   async function handleAddItem(){
@@ -21,7 +22,7 @@ export default function AddItemPage() {
 
         try{
 
-       const result =  axios.post("http://localhost:3000/api/products",{
+       const result =  axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/products`,{
 
             key : productKey,
             name : productName,

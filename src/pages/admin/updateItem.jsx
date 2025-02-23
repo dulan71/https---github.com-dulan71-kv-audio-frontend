@@ -27,7 +27,7 @@ export default function UpdateItemPage() {
 
         try{
 
-       const result = await axios.put("http://localhost:3000/api/products/"+productKey,{
+       const result = await axios.put(`${import.meta.env.VITE_BACKEND_URL}/api/products/`+productKey,{
 
             key : productKey,
             name : productName,
@@ -39,7 +39,7 @@ export default function UpdateItemPage() {
 
             headers : {
                 Authorization : "Bearer " + token,
-                //mehana Bearer + space aniwaren add wenn oni
+                //methana Bearer + space aniwaren add wenn oni
             },
         });
 console.log(result);
