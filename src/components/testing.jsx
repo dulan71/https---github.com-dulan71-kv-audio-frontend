@@ -1,38 +1,24 @@
 import { useState } from "react"
+import mediaUpload from "../utils/mediaUpload";
 
 export default function Testing(){
-    const[count,setCount]= useState(0);
 
-    const [itemName, setItemName]=useState("Coconuts");
+    const [file,setFile] = useState(null)
 
-
+    function uploadFile(){
+        console.log(file)
+        mediaUpload(file)
+    }
+   
     return(
-        <div className="w-full h-screen bg-yellow-50 flex flex-col justify-center items-center">
-            <h1 className="text-9xl">{count}</h1>
-
-            <button className="w-[200px] h-[60px] bg-black text-3xl text-white
-            rounded-lg flex justify-center item-center" onClick={
-                ()=>{
-                    
-                    const newCount = count+1
-                    setCount(newCount)
-                }
-            }>
-                Count
-            </button>
-            <button className="w-[200px] h-[60px] bg-black text-3xl text-white rounded-lg flex justify-center
-            " onClick={()=>{
-                setItemName("Cocunut")
-            }}>
-                Coconut
-            </button>
-            <button className="w-[200px] h-[60px] bg-black text-3xl text-white rounded-lg flex justify-center">
-                Banana
-            </button>
-            <button className="w-[200px] h-[60px] bg-black text-3xl text-white rounded-lg flex justify-center">
-                Apple
-            </button>
+        <div className = "w-full flex flex-col justify-center items-center h-screen">
+            <input type = "file"  onChange={(e)=>{setFile(e.target.files[0])}}/>
            
+            <button onClick={uploadFile} className="w-[200px] h-[50px] bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition ">
+                Upload
+            </button>
+            
         </div>
-    )
+        
+    );
 }
