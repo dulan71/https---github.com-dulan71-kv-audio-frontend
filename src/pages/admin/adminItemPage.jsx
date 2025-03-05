@@ -38,7 +38,7 @@ export default function AdminItemPage() {
         const token = localStorage.getItem("token");
         axios.get("http://localhost:3000/api/products", {
             
-       //const result = await axios.put(`${import.meta.env.VITE_BACKEND_URL}/api/products/`+productKey,{
+      // const result = await axios.put(`${import.meta.env.VITE_BACKEND_URL}/api/products/`+productKey,{
 
             headers: { Authorization: `Bearer ${token}` },
         })
@@ -52,22 +52,22 @@ export default function AdminItemPage() {
         });
     }, [itemsLoaded]);
 
-    const handleDelete = (key) => {
+    async function handleDelete  (key) {
         if(window.confirm("Are you sure you want to delete this item?")){
-        setItems(items.filter(item => item.key !== key));
-
-        axios.delete(`${import.meta.env.VITE_BACKEND_URL}/api/products/${key}`,{
-            headers: {Authorization: `Bearer ${token}`},
-        }).then(
-            (res)=>{
-                console.log(res.data);
-                setItemsLoaded(itemsLoaded); //delete item & reload the page
+        
+            try {
+                const token = localStorage.getItem("token"); // Retrieve token
+                await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/api/products/${key}`, {
+                    headers: { Authorization: `Bearer ${token}` },
+                });
+    
+                // Remove the deleted item from the state
+                setItems(items.filter(item => item.key !== key));
+    
+                console.log(`Item with key ${key} deleted successfully`);
+            } catch (err) {
+                console.error("Error deleting item:", err);
             }
-        ).catch(
-            (err)=>{
-                console.error(err);
-            }
-        )
         }
     };
 
