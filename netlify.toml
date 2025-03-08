@@ -1,8 +1,16 @@
-[build]
-  command = "npm run build"  # Adjust if using a different build command
-  publish = "build"          # Use "dist" for Vue, "build" for React, etc.
-
 [[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
+from = "/*"
+to = "/index.html"
+ststus = 200
+
+[[headers]]
+for = "/assets/*.jpg"
+[headers.values]
+Content-Type ="image/jpeg"
+Cache-Control = "public, max-age=31536000"
+
+[[headers]]
+for = "/assets/*.png"
+[headers.values]
+Content-Type = "image/png"
+Cache-Control = "public, max-age=31536000"
